@@ -19,4 +19,23 @@ class HomeController extends Controller
         return view('home',[
             'books'=>$books]);
     }
+
+    public function details($id){
+        $book = Book::findOrFail($id);
+
+        if($book->status == 0){
+            abort(404);
+        }
+
+        $relatedBooks = Book::where('status', 1)
+                        ->where('id', '!=', $book->id)
+                        ->inRandomOrder()
+                        ->limit(3)
+                        ->get();
+
+        return view('book-detail', [
+            'book'=>$book,
+            'relatedBooks'=>$relatedBooks
+        ]);
+    }
 }
