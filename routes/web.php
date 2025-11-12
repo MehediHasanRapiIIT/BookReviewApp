@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/book/{id}', [HomeController::class, 'details'])->name('book.details');
+Route::post('/save-book-review', [HomeController::class, 'saveReview'])->name('book.saveReview');
 
 
 
